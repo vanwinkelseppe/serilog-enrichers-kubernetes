@@ -28,5 +28,18 @@
         </PackageReference>
         <PackageReference Include="Serilog" Version="2.10.0" />
     </ItemGroup>
+    <ItemGroup>
+      <None Update="KubernetesLoggerConfigurationExtensions.tt">
+        <Generator>TextTemplatingFileGenerator</Generator>
+        <LastGenOutput>KubernetesLoggerConfigurationExtensions.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Update="KubernetesLoggerConfigurationExtensions.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>KubernetesLoggerConfigurationExtensions.tt</DependentUpon>
+      </Compile>
+    </ItemGroup>
 
 </Project>

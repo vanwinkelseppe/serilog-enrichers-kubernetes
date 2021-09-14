@@ -1,0 +1,194 @@
+<#@ output extension=".cs" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+    var kubernetesSingleLineInformationDict = new Dictionary<string, Dictionary<string, string>>
+    {
+        {
+            "Pod Namespace",
+            new Dictionary<string, string>
+            {
+                {"Name", "K8sPodNamespace"},
+                {"FilePathApendix", "namespace"},
+                {"EnvironmentVariable", "POD_NAMESPACE"}
+            }
+        },
+        {
+            "Pod Name",
+            new Dictionary<string, string>
+            {
+                {"Name", "K8sPodName"},
+                {"FilePathApendix", "name"},
+                {"EnvironmentVariable", "POD_NAMES"}
+            }
+        },
+        {
+            "Pod UID",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodUID"},
+                {"FilePathApendix", "uid"},
+                {"EnvironmentVariable", "POD_UID"}
+            }
+        },
+        {
+            "Pod Node Name",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodNodeName"},
+                {"FilePathApendix", "node_name"},
+                {"EnvironmentVariable", "POD_NODE_NAME"}
+            }
+        },
+        {
+            "Pod Service Account Name",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodServiceAccountName"},
+                {"FilePathApendix", "serviceaccount_name"},
+                {"EnvironmentVariable", "POD_SERVICEACCOUNT_NAME"}
+            }
+        },
+        {
+            "Pod Host IP",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodHostIP"},
+                {"FilePathApendix", "host_ip"},
+                {"EnvironmentVariable", "POD_HOST_IP"}
+            }
+        },
+        {
+            "Pod IP",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodIP"},
+                {"FilePathApendix", "ip"},
+                {"EnvironmentVariable", "POD_IP"}
+            }
+        },
+        {
+            "Pod CPU Limit",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodCPULimit"},
+                {"FilePathApendix", "cpu_limit"},
+                {"EnvironmentVariable", "POD_CPU_LIMIT"}
+            }
+        },
+        {
+            "Pod CPU Request",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodCPURequest"},
+                {"FilePathApendix", "cpu_request"},
+                {"EnvironmentVariable", "POD_CPU_REQUEST"}
+            }
+        },
+        {
+            "Pod Memory Limit",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodMemoryLimit"},
+                {"FilePathApendix", "memory_limit"},
+                {"EnvironmentVariable", "POD_MEMORY_LIMIT"}
+            }
+        },
+        {
+            "Pod Memory Request",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodMemoryRequest"},
+                {"FilePathApendix", "memory_request"},
+                {"EnvironmentVariable", "POD_MEMORY_REQUEST"}
+            }
+        },
+    };
+    
+    var kubernetesMultiLineInformationDict = new Dictionary<string, Dictionary<string, string>>
+    {
+        {"Pod Annotations", new Dictionary<string, string>
+            {
+                {"Enricher", "KubernetesPodAnnotationsEnricher"},
+                {"Name","K8sPodAnnotations"},
+                {"FilePathApendix", "annotations"}
+            }
+        },
+        {"Pod Labels", new Dictionary<string, string>
+        {
+            {"Enricher", "KubernetesPodLabelsEnricher"},
+            {"Name","K8sPodLabels"},
+            {"FilePathApendix", "labels"}
+        }
+        }
+    };
+#>
+using System;
+using Serilog.Configuration;
+using Serilog.Enrichers;
+
+namespace Serilog
+{
+    /// <summary>
+    /// Extends <see cref="LoggerConfiguration"/> to add enrichers related to process.
+    /// capabilities.
+    /// </summary>
+    public static class KubernetesLoggerConfigurationExtensions
+    {
+<#
+    foreach (var kubernetesInfo in kubernetesSingleLineInformationDict)
+    {
+#>
+        /// <summary>
+        /// Enriches log events with the current Kubernetes <#= kubernetesInfo.Key #>. The process works only when you use the Downward api
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/"/>
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
+        /// </summary>
+        /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
+        /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
+        /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        public static LoggerConfiguration With<#= kubernetesInfo.Value["Name"] #>(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "<#= kubernetesInfo.Value["EnvironmentVariable"] #>", string filePath = "/etc/podinfo/<#= kubernetesInfo.Value["FilePathApendix"] #>")
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("<#= kubernetesInfo.Value["Name"] #>",downwardApiMethod, environmentVariableName, filePath));
+        }
+<#
+    }
+    
+#>
+        
+
+        /// <summary>
+        /// Enriches log events with the current Kubernetes Pod information property that is given. The process works only when you use the Downward api
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/"/>
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
+        /// </summary>
+        /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="propertyName">Custom property that is not yet present in the Enricher package</param>
+        /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
+        /// <param name="environmentVariableName">Custom environment variable name, cannot be null if DownwardApiMethod.EnvironmentVariable</param>
+        /// <param name="filePath">Custom path to the podinfo file, cannot be null if DownwardApiMethod.File</param>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        public static LoggerConfiguration WithK8sPodInformation(this LoggerEnrichmentConfiguration enrichmentConfiguration,string propertyName, DownwardApiMethod downwardApiMethod, string environmentVariableName = "", string filePath = "")
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(propertyName,downwardApiMethod, environmentVariableName, filePath));
+        }
+        
+
+<#
+    foreach (var kubernetesInfo in kubernetesMultiLineInformationDict)
+    {
+#>
+        
+        /// <summary>
+        /// Enriches log events with the current Kubernetes <#=kubernetesInfo.Key#>. The process works only when you use the Downward api
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/"/>
+        /// </summary>
+        /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        public static LoggerConfiguration With<#= kubernetesInfo.Value["Name"] #>(this LoggerEnrichmentConfiguration enrichmentConfiguration, string filePath = "/etc/podinfo/<#= kubernetesInfo.Value["FilePathApendix"] #>")
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With(new <#=kubernetesInfo.Value["Enricher"]#>(filePath));
+        }
+
+<#
+    }
+#>
+        
+    }
+}
