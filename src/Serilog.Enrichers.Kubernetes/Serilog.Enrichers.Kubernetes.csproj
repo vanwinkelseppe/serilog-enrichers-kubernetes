@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+        <PropertyGroup>
+            <TargetFramework>net5.0</TargetFramework>
+            <RootNamespace>Serilog</RootNamespace>
+        </PropertyGroup> 
+        <PropertyGroup>
+        <Description>The Kubernetes enricher for Serilog.</Description>
+        <VersionPrefix>1.0.1</VersionPrefix>
+        <Authors>Seppe Van Winkel</Authors>
+        <AssemblyName>Serilog.Enrichers.Kubernetes</AssemblyName>
+        <PackageId>Serilog.Enrichers.Kubernetes</PackageId>
+        <PackageTags>serilog;kubernetes;enricher</PackageTags>
+        <!--<PackageIcon>TODO</PackageIcon>-->
+        <PackageProjectUrl>https://github.com/vanwinkelseppe/serilog-enrichers-kubernetes</PackageProjectUrl>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+        <RepositoryUrl>https://github.com/vanwinkelseppe/serilog-enrichers-kubernetes</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Serilog" Version="2.10.0" />
+    </ItemGroup>
+
+</Project>
