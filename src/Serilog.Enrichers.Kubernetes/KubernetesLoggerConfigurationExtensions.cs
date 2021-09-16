@@ -80,7 +80,7 @@ namespace Serilog
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodServiceAccountName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_SERVICEACCOUNT_NAME", string filePath = "/etc/podinfo/serviceaccount_name")
+        public static LoggerConfiguration WithK8sPodServiceAccountName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_SERVICE_ACCOUNT_NAME", string filePath = "/etc/podinfo/service_account_name")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
             return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodServiceAccountName",downwardApiMethod, environmentVariableName, filePath));
@@ -174,6 +174,36 @@ namespace Serilog
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
             return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodMemoryRequest",downwardApiMethod, environmentVariableName, filePath));
+        }
+        /// <summary>
+        /// Enriches log events with the current Kubernetes Pod Ephemeral-storage limit. The process works only when you use the Downward api
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/"/>
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
+        /// </summary>
+        /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
+        /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
+        /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        public static LoggerConfiguration WithK8sPodEphemeralStorageLimit(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_EPHEMERAL_STORAGE_LIMIT", string filePath = "/etc/podinfo/ephemeral_storage_limit")
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodEphemeralStorageLimit",downwardApiMethod, environmentVariableName, filePath));
+        }
+        /// <summary>
+        /// Enriches log events with the current Kubernetes Pod Ephemeral-storage Request. The process works only when you use the Downward api
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/"/>
+        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
+        /// </summary>
+        /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
+        /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
+        /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        public static LoggerConfiguration WithK8sPodEphemeralStorageRequest(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_EPHEMERAL_STORAGE_REQUEST", string filePath = "/etc/podinfo/ephemeral_storage_request")
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodEphemeralStorageRequest",downwardApiMethod, environmentVariableName, filePath));
         }
         
 

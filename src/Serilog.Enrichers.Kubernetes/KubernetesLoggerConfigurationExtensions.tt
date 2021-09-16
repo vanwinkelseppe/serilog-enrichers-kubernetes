@@ -41,8 +41,8 @@
             "Pod Service Account Name",new Dictionary<string, string>
             {
                 {"Name", "K8sPodServiceAccountName"},
-                {"FilePathApendix", "serviceaccount_name"},
-                {"EnvironmentVariable", "POD_SERVICEACCOUNT_NAME"}
+                {"FilePathApendix", "service_account_name"},
+                {"EnvironmentVariable", "POD_SERVICE_ACCOUNT_NAME"}
             }
         },
         {
@@ -93,6 +93,22 @@
                 {"EnvironmentVariable", "POD_MEMORY_REQUEST"}
             }
         },
+        {
+            "Pod Ephemeral-storage limit",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodEphemeralStorageLimit"},
+                {"FilePathApendix", "ephemeral_storage_limit"},
+                {"EnvironmentVariable", "POD_EPHEMERAL_STORAGE_LIMIT"}
+            }
+        },
+        {
+            "Pod Ephemeral-storage Request",new Dictionary<string, string>
+            {
+                {"Name", "K8sPodEphemeralStorageRequest"},
+                {"FilePathApendix", "ephemeral_storage_request"},
+                {"EnvironmentVariable", "POD_EPHEMERAL_STORAGE_REQUEST"}
+            }
+        }
     };
     
     var kubernetesMultiLineInformationDict = new Dictionary<string, Dictionary<string, string>>
