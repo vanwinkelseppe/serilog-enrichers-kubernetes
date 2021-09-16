@@ -19,7 +19,7 @@ jobs:
     - name: Set VERSION variable from tag
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Pack
-      run: dotnet pack --configuration Release /p:Version=${VERSION} --output .
+      run: dotnet pack ./src/Serilog.Enrichers.Kubernetes.sln --configuration Release /p:Version=${VERSION} --output .
     - name: Push to nuget
       run: dotnet nuget push Serilog.Enrichers.Kubernetes.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN}
       env:
