@@ -20,10 +20,6 @@ jobs:
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Pack
       run: dotnet pack ./src/Serilog.Enrichers.Kubernetes.sln --configuration Release /p:Version=${VERSION} --output .
-    - name: Push to nuget
-      run: dotnet nuget push Serilog.Enrichers.Kubernetes.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN}
-      env:
-        NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
     - name: Push to github
       run: dotnet nuget push Serilog.Enrichers.Kubernetes.${VERSION}.nupkg --source https://nuget.pkg.github.com/vanwinkelseppe/index.json --api-key ${GITHUB_TOKEN}
       env:
