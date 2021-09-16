@@ -38,7 +38,7 @@ You can also choose to use the Environment Variable way by using  `DownwardApiMe
 
 See `examples/full-example-downwardapi-file-mode.yaml`
 
-- | Default path | Kubernetes Configuration variable
+Code usage | Default path | Kubernetes Configuration variable
 --- | --- | --- 
 `Enrich.WithK8sPodNamespace()` | `/etc/podinfo/namespace` | `fieldRef.fieldPath: metadata.namespace`
 `Enrich.WithK8sPodName()` | `/etc/podinfo/name` | `fieldRef.fieldPath: metadata.name`
@@ -60,7 +60,7 @@ See `examples/full-example-downwardapi-file-mode.yaml`
 
 See `examples/full-example-downwardapi-environment-variable-mode.yaml`
 
-- | Default path | Kubernetes Configuration variable
+Code usage | Default path | Kubernetes Configuration variable
 --- | --- | --- 
 `Enrich.WithK8sPodNamespace(DownwardApiMethod.EnvironmentVariable)` | `POD_NAMESPACE` | `fieldRef.fieldPath: metadata.namespace`
 `Enrich.WithK8sPodName(DownwardApiMethod.EnvironmentVariable)` | `/POD_NAME` | `fieldRef.fieldPath: metadata.name`

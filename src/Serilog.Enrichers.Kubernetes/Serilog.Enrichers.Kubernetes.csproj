@@ -6,7 +6,7 @@
         </PropertyGroup> 
         <PropertyGroup>
         <Description>The Kubernetes enricher for Serilog.</Description>
-        <VersionPrefix>1.0.1</VersionPrefix>
+        <VersionPrefix>1.0.2</VersionPrefix>
         <Authors>Seppe Van Winkel</Authors>
         <AssemblyName>Serilog.Enrichers.Kubernetes</AssemblyName>
         <PackageId>Serilog.Enrichers.Kubernetes</PackageId>
