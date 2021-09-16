@@ -6,12 +6,12 @@
         </PropertyGroup> 
         <PropertyGroup>
         <Description>The Kubernetes enricher for Serilog.</Description>
-        <VersionPrefix>1.0.2</VersionPrefix>
+        <VersionPrefix>1.0.3</VersionPrefix>
         <Authors>Seppe Van Winkel</Authors>
         <AssemblyName>Serilog.Enrichers.Kubernetes</AssemblyName>
         <PackageId>Serilog.Enrichers.Kubernetes</PackageId>
         <PackageTags>serilog;kubernetes;enricher</PackageTags>
-        <!--<PackageIcon>TODO</PackageIcon>-->
+        <PackageIcon>serilog-community-nuget.png</PackageIcon>
         <PackageProjectUrl>https://github.com/vanwinkelseppe/serilog-enrichers-kubernetes</PackageProjectUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -41,5 +41,12 @@
         <DependentUpon>KubernetesLoggerConfigurationExtensions.tt</DependentUpon>
       </Compile>
     </ItemGroup>
+
+    <ItemGroup>
+    <None Include="..\..\assets\serilog-community-nuget.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
