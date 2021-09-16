@@ -1,5 +1,7 @@
 using System;
+using Xunit;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace Serilog.Tests.Fixtures
 {
     internal class EnvironmentVariableTestFixture : IDisposable
