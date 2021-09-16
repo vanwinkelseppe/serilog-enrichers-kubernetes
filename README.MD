@@ -6,7 +6,7 @@ The Kubernetes enricher for Serilog. This enricher makes use of the Downward Api
 - [Expose Pod Information to Containers Through Files](https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/)
 - [Expose Pod Information to Containers Through Environment Variables](https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/)
  
-[![NuGet Version](http://img.shields.io/nuget/v/Serilog.Enrichers.Kubernetes.svg?style=flat)](https://www.nuget.org/packages/Serilog.Enrichers.Kubernetes/)
+[![Build package](https://github.com/vanwinkelseppe/serilog-enrichers-kubernetes/actions/workflows/dotnet-core.yml/badge.svg?branch=main)](https://github.com/vanwinkelseppe/serilog-enrichers-kubernetes/actions/workflows/dotnet-core.yml)[![NuGet Version](http://img.shields.io/nuget/v/Serilog.Enrichers.Kubernetes.svg?style=flat)](https://www.nuget.org/packages/Serilog.Enrichers.Kubernetes/)
 
 
 ## Installation
