@@ -21,8 +21,6 @@ jobs:
       run: dotnet restore
       working-directory: ./src
     - name: Build
-      run: dotnet build --no-restore -c Release
-      working-directory: ./src
+      run: dotnet build ./src/Serilog.Enrichers.Kubernetes.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ./src
+      run: dotnet test ./src/Serilog.Enrichers.Kubernetes.sln --no-restore --verbosity normal
