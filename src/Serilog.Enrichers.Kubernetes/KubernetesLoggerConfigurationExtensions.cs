@@ -206,26 +206,6 @@ namespace Serilog
             return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodEphemeralStorageRequest",downwardApiMethod, environmentVariableName, filePath));
         }
         
-
-        /// <summary>
-        /// Enriches log events with the current Kubernetes Pod information property that is given. The process works only when you use the Downward api
-        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/"/>
-        /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
-        /// </summary>
-        /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
-        /// <param name="propertyName">Custom property that is not yet present in the Enricher package</param>
-        /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
-        /// <param name="environmentVariableName">Custom environment variable name, cannot be null if DownwardApiMethod.EnvironmentVariable</param>
-        /// <param name="filePath">Custom path to the podinfo file, cannot be null if DownwardApiMethod.File</param>
-        /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodInformation(this LoggerEnrichmentConfiguration enrichmentConfiguration,string propertyName, DownwardApiMethod downwardApiMethod, string environmentVariableName = "", string filePath = "")
-        {
-            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(propertyName,downwardApiMethod, environmentVariableName, filePath));
-        }
-        
-
-        
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Annotations. The process works only when you use the Downward api
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/"/>

@@ -28,7 +28,6 @@ Then add one of the following to the `LoggerConfiguration()`:
 - `Enrich.WithK8sPodUID()`
 - `Enrich.WithK8sPodAnnotations()`
 - `Enrich.WithK8sPodLabels()`
-- `Enrich.WithK8sPodInformation("PropertyName", DownwardApiMethod.File, filePath: "/etc/podinfo/propertyname")` or `Enrich.WithK8sPodInformation("PropertyName", DownwardApiMethod.EnvironmentVariable, environmentVariableName: "POD_PROPERTYNAME")`
 
 By default the Enrichers will be in `DownwardApiMethod.File` mode of the DownwardApi [Documentation File Method](https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/). You can look which of the properties have a default set, you can also overide it.
 
