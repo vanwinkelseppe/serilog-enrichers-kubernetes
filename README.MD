@@ -34,22 +34,47 @@ By default the Enrichers will be in `DownwardApiMethod.File` mode of the Downwar
 
 You can also choose to use the Environment Variable way by using  `DownwardApiMethod.EnvironmentVariable`  [Documentation ENV](https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/). You can look which of the properties have a default set, you can also overide it.
 
-### Defaults 
-Property | File Path | Environment Variable
---- | --- | --- 
-PodNamespace | `/etc/podinfo/namespace` | `POD_NAMESPACE`
-PodName | `/etc/podinfo/name` | `POD_NAME`
-PodUID | `/etc/podinfo/uid` | `POD_UID`
-PodAnnotations | `/etc/podinfo/annotations` | /
-PodLabels | `/etc/podinfo/labels` | /
+## Downward api File mode
 
-```csharp
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .Enrich.WithProcessId()
-    .Enrich.WithProcessName()
-    .CreateLogger();
-```
+See `examples/full-example-downwardapi-file-mode.yaml`
+
+- | Default path | Kubernetes Configuration variable
+--- | --- | --- 
+`Enrich.WithK8sPodNamespace()` | `/etc/podinfo/namespace` | `fieldRef.fieldPath: metadata.namespace`
+`Enrich.WithK8sPodName()` | `/etc/podinfo/name` | `fieldRef.fieldPath: metadata.name`
+`Enrich.WithK8sPodUID()` | `/etc/podinfo/uid` | `fieldRef.fieldPath: metadata.uid`
+`Enrich.K8sPodNodeName()` | `/etc/podinfo/node_name` | `fieldRef.fieldPath: spec.nodeName`
+`Enrich.K8sPodHostIP()` | `/etc/podinfo/host_ip` | `fieldRef.fieldPath: status.hostIP`
+`Enrich.K8sPodIP()` | `/etc/podinfo/ip` | `fieldRef.fieldPath: status.podIP`
+`Enrich.K8sPodServiceAccountName()` | `/etc/podinfo/service_account_name` | `fieldRef.fieldPath: spec.serviceAccountName`
+`Enrich.K8sPodCPULimit()` | `/etc/podinfo/cpu_limit` | `resourceFieldRef.resource: limits.cpu`
+`Enrich.K8sPodCPURequest()` | `/etc/podinfo/cpu_request` | `resourceFieldRef.resource: requests.cpu`
+`Enrich.K8sPodMemoryLimit()` | `/etc/podinfo/mem_limit` | `resourceFieldRef.resource: limits.memory`
+`Enrich.K8sPodMemoryRequest()` | `/etc/podinfo/mem_request` | `resourceFieldRef.resource: requests.memory`
+`Enrich.K8sPodEphemeralStorageLimit()` | `/etc/podinfo/ephemeral_storage_limit` | `resourceFieldRef.resource: limits.ephemeral-storage`
+`Enrich.K8sPodEphemeralStorageRequest()` | `/etc/podinfo/ephemeral_storage_request`| `resourceFieldRef.resource: requests.ephemeral-storage`
+`Enrich.KubernetesPodAnnotationsEnricher()` | `/etc/podinfo/annotations` | `fieldRef.fieldPath: status.annotations`
+`Enrich.KubernetesPodLabelsEnricher()` | `/etc/podinfo/labels` | `fieldRef.fieldPath: status.labels`
+
+## Downward api Environment Variable mode
+
+See `examples/full-example-downwardapi-environment-variable-mode.yaml`
+
+- | Default path | Kubernetes Configuration variable
+--- | --- | --- 
+`Enrich.WithK8sPodNamespace(DownwardApiMethod.EnvironmentVariable)` | `POD_NAMESPACE` | `fieldRef.fieldPath: metadata.namespace`
+`Enrich.WithK8sPodName(DownwardApiMethod.EnvironmentVariable)` | `/POD_NAME` | `fieldRef.fieldPath: metadata.name`
+`Enrich.WithK8sPodUID(DownwardApiMethod.EnvironmentVariable)` | `POD_UID` | `fieldRef.fieldPath: metadata.uid`
+`Enrich.K8sPodNodeName(DownwardApiMethod.EnvironmentVariable)` | `POD_NODE_NAME` | `fieldRef.fieldPath: spec.nodeName`
+`Enrich.K8sPodHostIP(DownwardApiMethod.EnvironmentVariable)` | `POD_HOST_IP` | `fieldRef.fieldPath: status.hostIP`
+`Enrich.K8sPodIP(DownwardApiMethod.EnvironmentVariable)` | `POD_IP` | `fieldRef.fieldPath: status.podIP`
+`Enrich.K8sPodServiceAccountName(DownwardApiMethod.EnvironmentVariable)` | `POD_SERVICE_ACCOUNT_NAME` | `fieldRef.fieldPath: spec.serviceAccountName`
+`Enrich.K8sPodCPULimit(DownwardApiMethod.EnvironmentVariable)` | `POD_CPU_LIMIT` | `resourceFieldRef.resource: limits.cpu`
+`Enrich.K8sPodCPURequest(DownwardApiMethod.EnvironmentVariable)` | `POD_CPU_REQUEST` | `resourceFieldRef.resource: requests.cpu`
+`Enrich.K8sPodMemoryLimit(DownwardApiMethod.EnvironmentVariable)` | `POD_MEMORY_LIMIT` | `resourceFieldRef.resource: limits.memory`
+`Enrich.K8sPodMemoryRequest(DownwardApiMethod.EnvironmentVariable)` | `POD_MEMORY_REQUEST` | `resourceFieldRef.resource: requests.memory`
+`Enrich.K8sPodEphemeralStorageLimit(DownwardApiMethod.EnvironmentVariable)` | `POD_EPHEMERAL_STORAGE_LIMIT` | `resourceFieldRef.resource: limits.ephemeral-storage`
+`Enrich.K8sPodEphemeralStorageRequest(DownwardApiMethod.EnvironmentVariable)` | `POD_EPHEMERAL_STORAGE_REQUEST`| `resourceFieldRef.resource: requests.ephemeral-storage`
 
 
 
