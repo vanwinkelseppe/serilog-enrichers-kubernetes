@@ -16,14 +16,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodNamespace(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_NAMESPACE", string filePath = "/etc/podinfo/namespace")
+        public static LoggerConfiguration WithK8sPodNamespace(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodNamespace", string environmentVariableName= "POD_NAMESPACE", string filePath = "/etc/podinfo/namespace")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodNamespace",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Name. The process works only when you use the Downward api
@@ -31,14 +32,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_NAMES", string filePath = "/etc/podinfo/name")
+        public static LoggerConfiguration WithK8sPodName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodName", string environmentVariableName= "POD_NAMES", string filePath = "/etc/podinfo/name")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodName",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod UID. The process works only when you use the Downward api
@@ -46,14 +48,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodUID(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_UID", string filePath = "/etc/podinfo/uid")
+        public static LoggerConfiguration WithK8sPodUID(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodUID", string environmentVariableName= "POD_UID", string filePath = "/etc/podinfo/uid")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodUID",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Node Name. The process works only when you use the Downward api
@@ -61,14 +64,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodNodeName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_NODE_NAME", string filePath = "/etc/podinfo/node_name")
+        public static LoggerConfiguration WithK8sPodNodeName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodNodeName", string environmentVariableName= "POD_NODE_NAME", string filePath = "/etc/podinfo/node_name")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodNodeName",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Service Account Name. The process works only when you use the Downward api
@@ -76,14 +80,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodServiceAccountName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_SERVICE_ACCOUNT_NAME", string filePath = "/etc/podinfo/service_account_name")
+        public static LoggerConfiguration WithK8sPodServiceAccountName(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodServiceAccountName", string environmentVariableName= "POD_SERVICE_ACCOUNT_NAME", string filePath = "/etc/podinfo/service_account_name")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodServiceAccountName",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Host IP. The process works only when you use the Downward api
@@ -91,14 +96,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodHostIP(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_HOST_IP", string filePath = "/etc/podinfo/host_ip")
+        public static LoggerConfiguration WithK8sPodHostIP(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodHostIP", string environmentVariableName= "POD_HOST_IP", string filePath = "/etc/podinfo/host_ip")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodHostIP",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod IP. The process works only when you use the Downward api
@@ -106,14 +112,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodIP(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_IP", string filePath = "/etc/podinfo/ip")
+        public static LoggerConfiguration WithK8sPodIP(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodIP", string environmentVariableName= "POD_IP", string filePath = "/etc/podinfo/ip")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodIP",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod CPU Limit. The process works only when you use the Downward api
@@ -121,14 +128,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodCPULimit(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_CPU_LIMIT", string filePath = "/etc/podinfo/cpu_limit")
+        public static LoggerConfiguration WithK8sPodCPULimit(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodCPULimit", string environmentVariableName= "POD_CPU_LIMIT", string filePath = "/etc/podinfo/cpu_limit")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodCPULimit",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod CPU Request. The process works only when you use the Downward api
@@ -136,14 +144,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodCPURequest(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_CPU_REQUEST", string filePath = "/etc/podinfo/cpu_request")
+        public static LoggerConfiguration WithK8sPodCPURequest(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodCPURequest", string environmentVariableName= "POD_CPU_REQUEST", string filePath = "/etc/podinfo/cpu_request")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodCPURequest",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Memory Limit. The process works only when you use the Downward api
@@ -151,14 +160,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodMemoryLimit(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_MEMORY_LIMIT", string filePath = "/etc/podinfo/memory_limit")
+        public static LoggerConfiguration WithK8sPodMemoryLimit(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodMemoryLimit", string environmentVariableName= "POD_MEMORY_LIMIT", string filePath = "/etc/podinfo/memory_limit")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodMemoryLimit",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Memory Request. The process works only when you use the Downward api
@@ -166,14 +176,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodMemoryRequest(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_MEMORY_REQUEST", string filePath = "/etc/podinfo/memory_request")
+        public static LoggerConfiguration WithK8sPodMemoryRequest(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodMemoryRequest", string environmentVariableName= "POD_MEMORY_REQUEST", string filePath = "/etc/podinfo/memory_request")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodMemoryRequest",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Ephemeral-storage limit. The process works only when you use the Downward api
@@ -181,14 +192,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodEphemeralStorageLimit(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_EPHEMERAL_STORAGE_LIMIT", string filePath = "/etc/podinfo/ephemeral_storage_limit")
+        public static LoggerConfiguration WithK8sPodEphemeralStorageLimit(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodEphemeralStorageLimit", string environmentVariableName= "POD_EPHEMERAL_STORAGE_LIMIT", string filePath = "/etc/podinfo/ephemeral_storage_limit")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodEphemeralStorageLimit",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         /// <summary>
         /// Enriches log events with the current Kubernetes Pod Ephemeral-storage Request. The process works only when you use the Downward api
@@ -196,14 +208,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration WithK8sPodEphemeralStorageRequest(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "POD_EPHEMERAL_STORAGE_REQUEST", string filePath = "/etc/podinfo/ephemeral_storage_request")
+        public static LoggerConfiguration WithK8sPodEphemeralStorageRequest(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "K8sPodEphemeralStorageRequest", string environmentVariableName= "POD_EPHEMERAL_STORAGE_REQUEST", string filePath = "/etc/podinfo/ephemeral_storage_request")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("K8sPodEphemeralStorageRequest",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
         
         /// <summary>

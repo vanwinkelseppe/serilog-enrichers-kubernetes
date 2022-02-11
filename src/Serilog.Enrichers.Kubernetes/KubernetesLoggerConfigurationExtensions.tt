@@ -151,14 +151,15 @@ namespace Serilog
         /// <see href="https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/"/>
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <param name="serilogPropertyKey">Custom serilog property key value.</param>
         /// <param name="downwardApiMethod">Downward Api method, defaults to File method.</param>
         /// <param name="environmentVariableName">Custom environment variable name, if you do not use the default.</param>
         /// <param name="filePath">Custom path to the podinfo file, if you do not use the default.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfiguration With<#= kubernetesInfo.Value["Name"] #>(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File, string environmentVariableName= "<#= kubernetesInfo.Value["EnvironmentVariable"] #>", string filePath = "/etc/podinfo/<#= kubernetesInfo.Value["FilePathApendix"] #>")
+        public static LoggerConfiguration With<#= kubernetesInfo.Value["Name"] #>(this LoggerEnrichmentConfiguration enrichmentConfiguration, DownwardApiMethod downwardApiMethod = DownwardApiMethod.File,string serilogPropertyKey = "<#= kubernetesInfo.Value["Name"] #>", string environmentVariableName= "<#= kubernetesInfo.Value["EnvironmentVariable"] #>", string filePath = "/etc/podinfo/<#= kubernetesInfo.Value["FilePathApendix"] #>")
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
-            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher("<#= kubernetesInfo.Value["Name"] #>",downwardApiMethod, environmentVariableName, filePath));
+            return enrichmentConfiguration.With(new KubernetesPodInformationEnricher(serilogPropertyKey, downwardApiMethod, environmentVariableName, filePath));
         }
 <#
     }
