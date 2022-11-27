@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
         <PropertyGroup>
-            <TargetFramework>net5.0</TargetFramework>
+            <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
             <RootNamespace>Serilog</RootNamespace>
         </PropertyGroup> 
         <PropertyGroup>
         <Description>The Kubernetes enricher for Serilog.</Description>
-        <VersionPrefix>1.0.3</VersionPrefix>
+        <VersionPrefix>1.0.4</VersionPrefix>
         <Authors>Seppe Van Winkel</Authors>
         <AssemblyName>Serilog.Enrichers.Kubernetes</AssemblyName>
         <PackageId>Serilog.Enrichers.Kubernetes</PackageId>
@@ -26,7 +26,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Serilog" Version="2.10.0" />
+        <PackageReference Include="Serilog" Version="2.12.0" />
     </ItemGroup>
     <ItemGroup>
       <None Update="KubernetesLoggerConfigurationExtensions.tt">
@@ -45,7 +45,6 @@
     <ItemGroup>
     <None Include="..\..\assets\serilog-community-nuget.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
